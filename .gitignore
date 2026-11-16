@@ -1,0 +1,98 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# Environment variables
+.env
+backend/.env
+*.env.local
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Android build cache (critical — very long filenames break git)
+/android/build/
+/android/app/build/
+/android/.gradle/
+*.apk
+*.aab
+
+# Android signing keys (NEVER commit these!)
+/android/key.properties
+/android/*.jks
+/android/*.keystore
+*.jks
+*.keystore
+
+# Backend artifacts
+backend/db.sqlite3
+backend/server.log
+backend/media/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/**/*.pyc
+
+# Temporary analysis / report files
+DEEP_ANALYSIS_REPORT.md
+PHONE_CONNECTION_GUIDE.md
+WHAT_WORKS_NOW.md
+WORK_REPORT_*.md
+project_analysis.md
+null_dummy/
+APP_BUNDLE_GUIDE.md
+APP_ICON_COMPLETE.md
+CI_CD_SETUP.md
+FIREBASE_SETUP.md
+firebase_setup_guide.md
+LEGAL_DOCUMENTS_COMPLETE.md
+LOCALIZATION_COMPLETE.md
+LOCALIZATION_FINAL_REPORT.md
+LOCALIZATION_STATUS.md
+MINSDK_COMPLETE.md
+PERMISSIONS_COMPLETE.md
+PROGUARD_COMPLETE.md
+RELEASE_SIGNING.md
+SPLASH_SCREEN_COMPLETE.md
+SPLASH_SCREEN_SETUP.md
+VERSIONING_GUIDE.md
+CHANGELOG.md
+full_project_audit.md

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volunteers-backend
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: volunteers-backend
+  template:
+    metadata:
+      labels:
+        app: volunteers-backend
+    spec:
+      containers:
+      - name: backend
+        image: volunteers-backend:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DB_HOST
+          value: volunteers-db
+        - name: REDIS_URL
+          value: redis://volunteers-redis:6379/1
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: secret-key
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /health/
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health/
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 10

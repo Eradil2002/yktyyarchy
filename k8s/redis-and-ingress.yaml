@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volunteers-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: volunteers-redis
+  template:
+    metadata:
+      labels:
+        app: volunteers-redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: volunteers-redis
+spec:
+  selector:
+    app: volunteers-redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: volunteers-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: api.volunteers.kg
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: volunteers-backend
+            port:
+              number: 80

@@ -1,0 +1,616 @@
+{
+  "@@locale": "ru",
+
+  "appName": "Ыктыярчы",
+  "appTagline": "Платформа волонтеров Кыргызстана",
+  "volunteersCount": "Волонтеров",
+  "organizationsCount": "Организаций",
+  "eventsCount": "Мероприятий",
+  "createAccount": "Создать аккаунт",
+  "loginToAccount": "Войти в аккаунт",
+  "joinGoodDeeds": "Присоединяйтесь к добрым делам",
+
+  "login": "Вход в аккаунт",
+  "loginSubtitle": "Войдите, чтобы продолжить",
+  "usernameOrEmail": "Username или Email",
+  "password": "Пароль",
+  "forgotPassword": "Забыли пароль?",
+  "loginButton": "Войти",
+  "noAccount": "Нет аккаунта? ",
+  "registerLink": "Зарегистрироваться",
+  "register": "Регистрация",
+  "registerSubtitle": "Создайте аккаунт волонтера",
+  "accountType": "Тип аккаунта",
+  "volunteer": "Волонтер",
+  "ngo": "НКО",
+  "firstName": "Имя *",
+  "lastName": "Фамилия *",
+  "username": "Username *",
+  "email": "Email *",
+  "phone": "Телефон (необязательно)",
+  "passwordConfirm": "Подтвердите пароль *",
+  "passwordHint": "Минимум 8 символов",
+  "repeatPassword": "Повторите пароль",
+  "agreeWith": "Я согласен с ",
+  "termsOfService": "Условиями использования",
+  "and": " и ",
+  "privacyPolicy": "Политикой конфиденциальности",
+  "registerButton": "Зарегистрироваться",
+  "haveAccount": "Уже есть аккаунт? ",
+  "loginLink": "Войти",
+
+  "fillAllFields": "Заполните все поля",
+  "fillAllRequiredFields": "Заполните все обязательные поля",
+  "agreeToTermsRequired": "Необходимо согласиться с условиями использования и политикой конфиденциальности",
+  "passwordsDoNotMatch": "Пароли не совпадают",
+  "passwordMinLength": "Пароль должен быть минимум 8 символов",
+
+  "hello": "Привет, {name}!",
+  "@hello": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hours": "часов",
+  "badges": "бейджей",
+  "rating": "рейтинг",
+  "searchPlaceholder": "Где я могу помочь сегодня?",
+  "nearby": "Рядом",
+  "today": "Сегодня",
+  "urgent": "Срочно",
+  "categories": "Категории",
+  "loadingError": "Ошибка загрузки",
+  "retry": "Повторить",
+  "noEventsFound": "Мероприятий не найдено",
+  "noEventsSubtitle": "Попробуйте изменить фильтры или поисковый запрос",
+  "filters": "Фильтры",
+  "filtersSubtitle": "Уточните результаты поиска",
+  "format": "Формат",
+  "all": "Все",
+  "offline": "Офлайн",
+  "online": "Онлайн",
+  "urgentOnly": "Только срочные",
+  "urgentOnlySubtitle": "Показывать только срочные мероприятия",
+  "reset": "Сбросить",
+  "apply": "Применить",
+  "tomorrow": "Завтра",
+  "participantsOf": "{current} из {total} участников",
+  "@participantsOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+
+  "myActivity": "Моя активность",
+  "myEvents": "Мои мероприятия",
+  "myEventsSubtitle": "Участия",
+  "myInitiatives": "Мои инициативы",
+  "myInitiativesSubtitle": "Добрые дела",
+  "achievements": "Достижения",
+  "achievementsReceived": "{count} получено",
+  "@achievementsReceived": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settings": "Настройки",
+  "editProfile": "Редактировать профиль",
+  "editProfileSubtitle": "Фото, ФИО, локация",
+  "notifications": "Уведомления",
+  "notificationsSubtitle": "Настройки push-уведомлений",
+  "language": "Язык",
+  "languageRussian": "Русский",
+  "aboutApp": "О приложении",
+  "privacyPolicyTitle": "Политика конфиденциальности",
+  "privacyPolicySubtitle": "Как мы защищаем ваши данные",
+  "termsOfServiceTitle": "Условия использования",
+  "termsOfServiceSubtitle": "Правила и соглашения",
+  "logout": "Выйти из аккаунта",
+  "volunteerBook": "Электронная книжка волонтера",
+  "confirmedHours": "{hours} подтвержденных часов",
+  "@confirmedHours": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "open": "Открыть",
+  "allAchievements": "Все",
+  "achievementsCount": "{unlocked} из {total} получено",
+  "@achievementsCount": {
+    "placeholders": {
+      "unlocked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewsFromOrganizations": "Отзывы от организаций",
+  "allReviews": "Все",
+  "daysAgo": "{days} дн. назад",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "monthsAgo": "{months} мес. назад",
+  "@monthsAgo": {
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
+  "todayLabel": "Сегодня",
+  "received": "✓ Получено",
+  "ngoProfileTitle": "Профиль НКО",
+  "orgNameLabel": "Название организации *",
+  "verifiedStatus": "Подтвержденный статус",
+  "notVerifiedStatus": "Без подтверждения",
+  "ngoEventsListTitle": "Список мероприятий",
+  "ngoNoEvents": "У этой организации пока нет мероприятий",
+  "ngoNoDescription": "Описание отсутствует",
+  "ngoEventsCount": "{count} мероприятий",
+  "@ngoEventsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "reviews": "Отзывы",
+  "guest": "Гость",
+  "organizationRating": "рейтинг организации",
+  "projectsCountShort": "{count} проектов",
+  "@projectsCountShort": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volunteersCountShort": "{count} волонтеров",
+  "@volunteersCountShort": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "distanceKm": "{distance} км",
+  "@distanceKm": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "registeredCount": "{count} записалось",
+  "@registeredCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hoursShort": "{hours} ч",
+  "@hoursShort": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "todayAt": "Сегодня в {time}",
+  "@todayAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "spotsAvailable": "✓ Есть {count} мест",
+  "@spotsAvailable": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noSpots": "✗ Мест нет",
+  "loginToRegister": "Войдите в аккаунт, чтобы записаться",
+  "registeredSuccess": "Вы записались! Удачи",
+  "registerFailed": "Не удалось записаться. Попробуйте позже.",
+  "manage": "Управлять",
+  "management": "Управление",
+  "registered": "Вы записаны",
+  "dateAndTime": "Дата и время",
+  "eventLocation": "Место проведения",
+  "showOnMap": "Показать на карте",
+  "participants": "Участники",
+  "volunteerHoursLabel": "Волонтерские часы",
+  "hoursWillBeCredited": "{hours} часов будут зачислены",
+  "@hoursWillBeCredited": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "descriptionLabel": "Описание",
+  "requirementsLabel": "Требования",
+  "titleLabel": "Название",
+  "eventTitleHint": "Пример: Субботник в парке",
+  "eventDescriptionHint": "Подробно опишите мероприятие...",
+  "eventLocationHint": "Введите адрес или нажмите GPS",
+  "hoursLabelShort": "Часов",
+  "spotsLabel": "Мест",
+  "publishEvent": "Опубликовать мероприятие",
+  "eventCreatedSuccess": "Мероприятие успешно создано!",
+  "eventCreateFailed": "Не удалось создать мероприятие",
+  "camera": "Камера",
+  "gallery": "Галерея",
+  "added": "Добавлено",
+  "photoNumber": "Фото {number}",
+  "@photoNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "sendForReview": "Отправить на проверку",
+  "initiativeAddBeforeAfterPhotos": "Добавьте хотя бы одно фото ДО и ПОСЛЕ",
+  "initiativeNeedGps": "Сначала определите GPS-локацию",
+  "initiativeSentForModeration": "Инициатива отправлена на модерацию. Часы начислятся после проверки.",
+  "initiativeInfoBanner": "Ключевой механизм для отдаленных регионов. Инициатива проходит модерацию перед подтверждением.",
+  "initiativeTitleHint": "Например: Уборка берега реки",
+  "initiativeDescriptionHint": "Опишите ваше доброе дело...",
+  "initiativeGpsCaptured": "GPS зафиксирован: {lat}, {lng}",
+  "@initiativeGpsCaptured": {
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lng": {
+        "type": "String"
+      }
+    }
+  },
+  "initiativeResolveGps": "Определить мою локацию (GPS)",
+  "liveCamera": "Live-камера",
+  "liveCameraDescription": "Включите для фото в реальном времени. Это снижает риск накруток.",
+  "initiativeModerationPending": "Статус модерации: на проверке",
+  "initiativeModerationDraft": "Статус модерации: черновик, еще не отправлено",
+  "initiativeBeforePhotos": "Фото ДО ({count}/3)",
+  "@initiativeBeforePhotos": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "initiativeAfterPhotos": "Фото ПОСЛЕ ({count}/3)",
+  "@initiativeAfterPhotos": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "initiativeSuccess": "Инициатива успешно отправлена",
+  "submitting": "Отправка...",
+  "notificationsMarkedRead": "Все уведомления прочитаны",
+  "readAllNotifications": "Прочитать все",
+  "noNotifications": "Нет уведомлений",
+  "noNotificationsSubtitle": "Когда появятся новые уведомления, они будут здесь",
+  "justNow": "только что",
+  "newSkill": "Новый навык",
+  "skillExampleHint": "Например: Дизайн",
+  "profileUpdatedSuccess": "Профиль успешно обновлен!",
+  "savingError": "Ошибка сохранения",
+  "mainInformation": "Основная информация",
+  "firstNameLabel": "Имя",
+  "lastNameLabel": "Фамилия",
+  "locationLabel": "Локация",
+  "aboutMeLabel": "О себе",
+  "skillsSection": "Навыки",
+  "enterField": "Введите {field}",
+  "@enterField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineScheduleLoaded": "Показано кэшированное расписание зарегистрированных мероприятий (offline режим).",
+  "cachedDataFrom": "Данные от {day}.{month}.{year}",
+  "@cachedDataFrom": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "month": {
+        "type": "int"
+      },
+      "year": {
+        "type": "int"
+      }
+    }
+  },
+  "searchOnMapPlaceholder": "Поиск на карте",
+  "onMapCount": "На карте: {count}",
+  "@onMapCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "findingYou": "Ищем вас...",
+  "eventFallbackTitle": "Мероприятие",
+  "emailVerificationTitle": "Подтверждение email",
+  "emailVerificationSubtitle": "Введите 6-значный код из письма",
+  "verifyEmailButton": "Подтвердить email",
+  "resendCode": "Отправить код повторно",
+  "verificationCodeInvalid": "Введите корректный 6-значный код",
+  "emailVerifiedSuccess": "Email успешно подтвержден",
+  "verificationFailed": "Ошибка подтверждения email",
+  "verificationCodeResent": "Код подтверждения отправлен повторно",
+  "verificationResendFailed": "Не удалось отправить код повторно",
+  "whatsappAuthButton": "Войти через WhatsApp",
+  "whatsappLoginTitle": "Авторизация через WhatsApp",
+  "whatsappLoginSubtitle": "Введите номер телефона и получите OTP код в WhatsApp",
+  "whatsappPhoneRequired": "Введите номер телефона",
+  "sendCodeWhatsApp": "Отправить код в WhatsApp",
+  "whatsappCodeSent": "Код отправлен в WhatsApp",
+  "whatsappCodeSendFailed": "Не удалось отправить WhatsApp код",
+  "whatsappVerifyButton": "Подтвердить код",
+  "enterVerificationCode": "Введите код подтверждения",
+  "reviewsCount": "{count} отзывов",
+  "@reviewsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "anonymous": "Аноним",
+  "hoursAgo": "{hours} ч. назад",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "minutesAgo": "{minutes} мин. назад",
+  "@minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "noComment": "Без комментария",
+  "loadingReviewsError": "Ошибка загрузки отзывов: {error}",
+  "@loadingReviewsError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+
+  "upcoming": "Предстоящие",
+  "past": "Прошедшие",
+  "noTitle": "Без названия",
+  "notSpecified": "Не указано",
+  "approved": "Одобрено",
+  "pending": "Ожидает",
+  "rejected": "Отклонено",
+  "attended": "Посещено",
+  "missed": "Пропущено",
+  "leaveReview": "Оставить отзыв →",
+  "leaveReviewTitle": "Оставить отзыв",
+  "rateEvent": "Оцените мероприятие \"{title}\"",
+  "@rateEvent": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "shareImpression": "Поделитесь впечатлениями (необязательно)",
+  "send": "Отправить",
+  "thankYouForReview": "Спасибо за ваш отзыв!",
+  "error": "Ошибка: {error}",
+  "@error": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+
+  "onModeration": "На модерации",
+  "newInitiative": "Новое дело",
+  "loadingError": "Ошибка загрузки: {error}",
+  "@loadingError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+
+  "notificationSettings": "Настройки уведомлений",
+  "pushNotifications": "Push-уведомления",
+  "newEvents": "Новые мероприятия",
+  "newEventsSubtitle": "По вашим категориям",
+  "invitationsFromNGO": "Приглашения от НКО",
+  "invitationsSubtitle": "Когда организация вас приглашает",
+  "newReviews": "Новые отзывы",
+  "newReviewsSubtitle": "Когда НКО оставляет отзыв",
+  "whatsapp": "WhatsApp",
+  "eventReminders": "Напоминания о событиях",
+  "eventRemindersSubtitle": "За 24 часа до начала",
+
+  "languageSettings": "Язык / Тил",
+  "russian": "Русский",
+  "russianNative": "Russian",
+  "kyrgyz": "Кыргызча",
+  "kyrgyzNative": "Kyrgyz",
+
+  "homeMenu": "Главная",
+  "mapMenu": "Карта",
+  "talentsMenu": "Таланты",
+  "profileMenu": "Профиль",
+  "createWhatTitle": "Что хотите создать?",
+  "createWhatSubtitle": "Выберите тип активности",
+  "createEventTitle": "Мероприятие",
+  "createEventSubtitle": "Для НКО и организаторов — официальные события с записью",
+  "createInitiativeTitle": "Доброе дело",
+  "createInitiativeSubtitle": "Для жителей сел и городов — локальная помощь без НКО",
+  "talentsOnlyOrganizers": "доступно только для организаторов",
+  "talentRadarOnlyForOrganizers": "Радар талантов доступен только аккаунтам организаторов.",
+  "talentRadarTitle": "Радар талантов",
+  "talentRadarSubtitle": "Найдите лучших волонтеров для вашего проекта",
+  "talentFoundCount": "Найдено: {count} лучших волонтеров",
+  "@talentFoundCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "talentSearchHint": "Поиск по имени...",
+  "talentMinRating": "Мин. рейтинг:",
+  "talentCity": "Город:",
+  "talentSkill": "Навык:",
+  "talentRadius": "Радиус: {km} км",
+  "@talentRadius": {
+    "placeholders": {
+      "km": {
+        "type": "int"
+      }
+    }
+  },
+  "talentResetFilters": "Сбросить фильтры",
+  "invite": "Пригласить",
+  "invitePerson": "Пригласить {name}",
+  "@invitePerson": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseEventForInvite": "Выберите мероприятие для приглашения:",
+  "noEventsForInvite": "У вас пока нет активных мероприятий для приглашения.",
+  "inviteProjectTitle": "Приглашение на проект!",
+  "inviteProjectBody": "Организация приглашает вас на мероприятие \"{eventTitle}\".",
+  "@inviteProjectBody": {
+    "placeholders": {
+      "eventTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteSentSuccess": "✅ Приглашение успешно отправлено!",
+  "inviteSendError": "Ошибка отправки: {error}",
+  "@inviteSendError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "sendInvite": "Отправить приглашение",
+  "orgShort": "НКО",
+  "cityOsh": "Ош",
+  "cityKarakol": "Каракол",
+  "cityNaryn": "Нарын",
+  "cityJalalAbad": "Джалал-Абад",
+  "skillMedicine": "Медицина",
+  "skillPedagogy": "Педагогика",
+  "skillConstruction": "Строительство",
+  "skillPhotography": "Фотография",
+
+  "categoryEcology": "Экология",
+  "categoryEducation": "Образование",
+  "categoryHealth": "Здоровье",
+  "categorySocial": "Соц. помощь",
+  "categoryAnimals": "Животные",
+  "categoryCulture": "Культура",
+  "categorySport": "Спорт",
+  "categoryOther": "Другое",
+
+  "kyrgyzstan": "Кыргызстан",
+  "bishkek": "Бишкек",
+  "loading": "Загрузка...",
+  "save": "Сохранить",
+  "cancel": "Отмена",
+  "add": "Добавить",
+  "delete": "Удалить",
+  "edit": "Редактировать",
+  "back": "Назад",
+  "next": "Далее",
+  "done": "Готово",
+  "yes": "Да",
+  "no": "Нет",
+  "ok": "ОК",
+  "close": "Закрыть",
+  "exportPdf": "Экспорт PDF",
+  "noEntriesYet": "Пока нет записей",
+  "dateLabel": "Дата",
+  "activityLabel": "Активность",
+  "hoursLabel": "Часы",
+  "statusLabel": "Статус",
+
+  "recentlyViewed": "Недавно просмотренные",
+
+  "onboardingWelcome": "Добро пожаловать в Ыктыярчы",
+  "onboardingStep1": "Находите мероприятия на карте и в ленте — фильтры и поиск помогут быстрее.",
+  "onboardingStep2": "Записывайтесь одним нажатием и следите за местами в событии.",
+  "onboardingStep3": "Напоминания и история просмотров держат вас в курсе.",
+  "onboardingGetStarted": "Начать",
+
+  "shareEventSubject": "Мероприятие: {title}",
+  "@shareEventSubject": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "shareEventBody": "{title}\n\n{detail}",
+  "@shareEventBody": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+
+  "mapQuickFiltersHint": "Быстрые фильтры",
+  "loadingMore": "Ещё загрузка..."
+}

@@ -1,0 +1,7 @@
+config/serviceAccountKey.json
+.env.production
+backend/config/serviceAccountKey.json
+backend/.env.production
+venv/
+staticfiles/
+server.log

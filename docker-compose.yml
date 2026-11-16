@@ -1,0 +1,71 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: volunteers_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: volunteering_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d volunteering_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: volunteers_redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: volunteers_backend
+    ports:
+      - "8001:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=django-insecure-dev-key-change-in-production
+      # PostgreSQL
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_NAME=volunteering_db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      # Redis (new)
+      - REDIS_URL=redis://redis:6379/1
+      # Email
+      - EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+      # S3 (optional)
+      - USE_S3=${USE_S3:-False}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME:-}
+      - AWS_S3_REGION_NAME=${AWS_S3_REGION_NAME:-}
+      - AWS_S3_ENDPOINT_URL=${AWS_S3_ENDPOINT_URL:-}
+      - AWS_S3_CUSTOM_DOMAIN=${AWS_S3_CUSTOM_DOMAIN:-}
+      - AWS_QUERYSTRING_AUTH=${AWS_QUERYSTRING_AUTH:-False}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+

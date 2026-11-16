@@ -1,0 +1,8 @@
+# Release Signing Configuration
+# This file contains sensitive information - NEVER commit it to git!
+# Copy this file to android/key.properties and fill in your values
+
+storePassword=YOUR_KEYSTORE_PASSWORD
+keyPassword=YOUR_KEY_PASSWORD
+keyAlias=upload
+storeFile=../upload-keystore.jks

@@ -1,0 +1,616 @@
+{
+  "@@locale": "ky",
+
+  "appName": "Ыктыярчы",
+  "appTagline": "Кыргызстандын ыктыярчылар платформасы",
+  "volunteersCount": "Ыктыярчылар",
+  "organizationsCount": "Уюмдар",
+  "eventsCount": "Иш-чаралар",
+  "createAccount": "Аккаунт түзүү",
+  "loginToAccount": "Аккаунтка кирүү",
+  "joinGoodDeeds": "Жакшы иштерге кошулуңуз",
+
+  "login": "Аккаунтка кирүү",
+  "loginSubtitle": "Улантуу үчүн кириңиз",
+  "usernameOrEmail": "Username же Email",
+  "password": "Сыр сөз",
+  "forgotPassword": "Сыр сөздү унуттуңузбу?",
+  "loginButton": "Кирүү",
+  "noAccount": "Аккаунт жокпу? ",
+  "registerLink": "Катталуу",
+  "register": "Катталуу",
+  "registerSubtitle": "Ыктыярчы аккаунтун түзүңүз",
+  "accountType": "Аккаунт түрү",
+  "volunteer": "Ыктыярчы",
+  "ngo": "КУУ",
+  "firstName": "Аты *",
+  "lastName": "Фамилиясы *",
+  "username": "Username *",
+  "email": "Email *",
+  "phone": "Телефон (милдеттүү эмес)",
+  "passwordConfirm": "Сыр сөздү ырастаңыз *",
+  "passwordHint": "Кеминде 8 белги",
+  "repeatPassword": "Сыр сөздү кайталаңыз",
+  "agreeWith": "Мен макулмун ",
+  "termsOfService": "Колдонуу шарттары",
+  "and": " жана ",
+  "privacyPolicy": "Купуялык саясаты",
+  "registerButton": "Катталуу",
+  "haveAccount": "Аккаунт барбы? ",
+  "loginLink": "Кирүү",
+
+  "fillAllFields": "Бардык талааларды толтуруңуз",
+  "fillAllRequiredFields": "Бардык милдеттүү талааларды толтуруңуз",
+  "agreeToTermsRequired": "Колдонуу шарттары жана купуялык саясаты менен макулдашуу керек",
+  "passwordsDoNotMatch": "Сыр сөздөр дал келбейт",
+  "passwordMinLength": "Сыр сөз кеминде 8 белгиден турушу керек",
+
+  "hello": "Салам, {name}!",
+  "@hello": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hours": "саат",
+  "badges": "белгилер",
+  "rating": "рейтинг",
+  "searchPlaceholder": "Бүгүн кайда жардам бере алам?",
+  "nearby": "Жакында",
+  "today": "Бүгүн",
+  "urgent": "Шашылыш",
+  "categories": "Категориялар",
+  "loadingError": "Жүктөө катасы",
+  "retry": "Кайталоо",
+  "noEventsFound": "Иш-чаралар табылган жок",
+  "noEventsSubtitle": "Фильтрлерди же издөө сурамын өзгөртүп көрүңүз",
+  "filters": "Фильтрлер",
+  "filtersSubtitle": "Издөө натыйжаларын тактаңыз",
+  "format": "Формат",
+  "all": "Баары",
+  "offline": "Жеринде",
+  "online": "Онлайн форматта",
+  "urgentOnly": "Шашылыш гана",
+  "urgentOnlySubtitle": "Шашылыш иш-чараларды гана көрсөтүү",
+  "reset": "Тазалоо",
+  "apply": "Колдонуу",
+  "tomorrow": "Эртең",
+  "participantsOf": "{current} / {total} катышуучу",
+  "@participantsOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+
+  "myActivity": "Менин активдүүлүгүм",
+  "myEvents": "Менин иш-чараларым",
+  "myEventsSubtitle": "Катышуулар",
+  "myInitiatives": "Менин демилгелерим",
+  "myInitiativesSubtitle": "Жакшы иштер",
+  "achievements": "Жетишкендиктер",
+  "achievementsReceived": "{count} алынды",
+  "@achievementsReceived": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settings": "Жөндөөлөр",
+  "editProfile": "Профилди өзгөртүү",
+  "editProfileSubtitle": "Сүрөт, АФА, жайгашкан жер",
+  "notifications": "Билдирмелер",
+  "notificationsSubtitle": "Push-билдирмелердин жөндөөлөрү",
+  "language": "Тил",
+  "languageRussian": "Орусча",
+  "aboutApp": "Тиркеме жөнүндө",
+  "privacyPolicyTitle": "Купуялык саясаты",
+  "privacyPolicySubtitle": "Маалыматтарыңызды кантип коргойбуз",
+  "termsOfServiceTitle": "Колдонуу шарттары",
+  "termsOfServiceSubtitle": "Эрежелер жана макулдашуулар",
+  "logout": "Аккаунттан чыгуу",
+  "volunteerBook": "Ыктыярчынын электрондук китепчеси",
+  "confirmedHours": "{hours} ырасталган саат",
+  "@confirmedHours": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "open": "Ачуу",
+  "allAchievements": "Баары",
+  "achievementsCount": "{unlocked} / {total} алынды",
+  "@achievementsCount": {
+    "placeholders": {
+      "unlocked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewsFromOrganizations": "Уюмдардан пикирлер",
+  "allReviews": "Баары",
+  "daysAgo": "{days} күн мурун",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "monthsAgo": "{months} ай мурун",
+  "@monthsAgo": {
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
+  "todayLabel": "Бүгүн",
+  "received": "✓ Алынды",
+  "ngoProfileTitle": "КУУ профили",
+  "orgNameLabel": "Уюмдун аталышы *",
+  "verifiedStatus": "Тастыкталган макам",
+  "notVerifiedStatus": "Тастыкталган эмес",
+  "ngoEventsListTitle": "Иш-чаралар тизмеси",
+  "ngoNoEvents": "Бул уюмда азырынча иш-чара жок",
+  "ngoNoDescription": "Сүрөттөмө жок",
+  "ngoEventsCount": "{count} иш-чара",
+  "@ngoEventsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "reviews": "Пикирлер",
+  "guest": "Конок",
+  "organizationRating": "уюмдун рейтинги",
+  "projectsCountShort": "{count} долбоор",
+  "@projectsCountShort": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volunteersCountShort": "{count} ыктыярчы",
+  "@volunteersCountShort": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "distanceKm": "{distance} км",
+  "@distanceKm": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "registeredCount": "{count} катталды",
+  "@registeredCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hoursShort": "{hours} с",
+  "@hoursShort": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "todayAt": "Бүгүн саат {time}",
+  "@todayAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "spotsAvailable": "✓ {count} орун бар",
+  "@spotsAvailable": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noSpots": "✗ Орун жок",
+  "loginToRegister": "Катталуу үчүн аккаунтка кириңиз",
+  "registeredSuccess": "Сиз катталдыңыз! Ийгилик",
+  "registerFailed": "Катталуу ишке ашкан жок. Кийин кайра аракет кылыңыз.",
+  "manage": "Башкаруу",
+  "management": "Башкаруу",
+  "registered": "Сиз катталгансыз",
+  "dateAndTime": "Күнү жана убактысы",
+  "eventLocation": "Өткөрүлүүчү жер",
+  "showOnMap": "Картадан көрсөтүү",
+  "participants": "Катышуучулар",
+  "volunteerHoursLabel": "Ыктыярчы сааттары",
+  "hoursWillBeCredited": "{hours} саат эсептелет",
+  "@hoursWillBeCredited": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "descriptionLabel": "Сүрөттөмө",
+  "requirementsLabel": "Талаптар",
+  "titleLabel": "Аталышы",
+  "eventTitleHint": "Мисалы: Паркта ишембилик",
+  "eventDescriptionHint": "Иш-чараны кеңири сүрөттөп бериңиз...",
+  "eventLocationHint": "Даректи киргизиңиз же GPS басыңыз",
+  "hoursLabelShort": "Саат",
+  "spotsLabel": "Орун",
+  "publishEvent": "Иш-чараны жарыялоо",
+  "eventCreatedSuccess": "Иш-чара ийгиликтүү түзүлдү!",
+  "eventCreateFailed": "Иш-чараны түзүү мүмкүн болгон жок",
+  "camera": "Камера",
+  "gallery": "Галерея",
+  "added": "Кошулду",
+  "photoNumber": "{number}-сүрөт",
+  "@photoNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "sendForReview": "Текшерүүгө жөнөтүү",
+  "initiativeAddBeforeAfterPhotos": "Кеминде бир ДО жана ПОСЛЕ сүрөтүн кошуңуз",
+  "initiativeNeedGps": "Адегенде GPS жайгашкан жерди аныктаңыз",
+  "initiativeSentForModeration": "Демилге модерацияга жөнөтүлдү. Сааттар текшерүүдөн кийин эсептелет.",
+  "initiativeInfoBanner": "Алыскы аймактар үчүн негизги механизм. Демилге тастыктоодон мурда модерациядан өтөт.",
+  "initiativeTitleHint": "Мисалы: Дарыя жээгин тазалоо",
+  "initiativeDescriptionHint": "Жакшы ишиңизди сүрөттөп бериңиз...",
+  "initiativeGpsCaptured": "GPS аныкталды: {lat}, {lng}",
+  "@initiativeGpsCaptured": {
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lng": {
+        "type": "String"
+      }
+    }
+  },
+  "initiativeResolveGps": "Менин жайгашкан жеримди аныктоо (GPS)",
+  "liveCamera": "Live-камера",
+  "liveCameraDescription": "Реалдуу убакытта сүрөткө тартуу үчүн күйгүзүңүз. Бул жасалмалоо тобокелин азайтат.",
+  "initiativeModerationPending": "Модерация абалы: текшерүүдө",
+  "initiativeModerationDraft": "Модерация абалы: черновик, али жөнөтүлгөн жок",
+  "initiativeBeforePhotos": "ДО сүрөттөрү ({count}/3)",
+  "@initiativeBeforePhotos": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "initiativeAfterPhotos": "ПОСЛЕ сүрөттөрү ({count}/3)",
+  "@initiativeAfterPhotos": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "initiativeSuccess": "Демилге ийгиликтүү жөнөтүлдү",
+  "submitting": "Жөнөтүлүүдө...",
+  "notificationsMarkedRead": "Бардык билдирмелер окулду",
+  "readAllNotifications": "Баарын окуу",
+  "noNotifications": "Билдирмелер жок",
+  "noNotificationsSubtitle": "Жаңы билдирмелер чыкканда бул жерде көрүнөт",
+  "justNow": "азыр эле",
+  "newSkill": "Жаңы көндүм",
+  "skillExampleHint": "Мисалы: Дизайн",
+  "profileUpdatedSuccess": "Профиль ийгиликтүү жаңыртылды!",
+  "savingError": "Сактоо катасы",
+  "mainInformation": "Негизги маалымат",
+  "firstNameLabel": "Аты",
+  "lastNameLabel": "Фамилиясы",
+  "locationLabel": "Жайгашкан жери",
+  "aboutMeLabel": "Мен жөнүндө",
+  "skillsSection": "Көндүмдөр",
+  "enterField": "{field} киргизиңиз",
+  "@enterField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineScheduleLoaded": "Катталган иш-чаралардын кэштелген графиги көрсөтүлдү (offline режим).",
+  "cachedDataFrom": "Маалымат {day}.{month}.{year} күнүнөн",
+  "@cachedDataFrom": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "month": {
+        "type": "int"
+      },
+      "year": {
+        "type": "int"
+      }
+    }
+  },
+  "searchOnMapPlaceholder": "Картадан издөө",
+  "onMapCount": "Картада: {count}",
+  "@onMapCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "findingYou": "Сизди издеп жатабыз...",
+  "eventFallbackTitle": "Иш-чара",
+  "emailVerificationTitle": "Email ырастоо",
+  "emailVerificationSubtitle": "Каттан келген 6 орундуу кодду киргизиңиз",
+  "verifyEmailButton": "Email ырастоо",
+  "resendCode": "Кодду кайра жөнөтүү",
+  "verificationCodeInvalid": "Туура 6 орундуу кодду киргизиңиз",
+  "emailVerifiedSuccess": "Email ийгиликтүү ырасталды",
+  "verificationFailed": "Email ырастоодо ката кетти",
+  "verificationCodeResent": "Ырастоо коду кайра жөнөтүлдү",
+  "verificationResendFailed": "Кодду кайра жөнөтүү мүмкүн болгон жок",
+  "whatsappAuthButton": "WhatsApp аркылуу кирүү",
+  "whatsappLoginTitle": "WhatsApp аркылуу авторизация",
+  "whatsappLoginSubtitle": "Телефон номериңизди киргизип, WhatsApp'ка OTP код алыңыз",
+  "whatsappPhoneRequired": "Телефон номерин киргизиңиз",
+  "sendCodeWhatsApp": "Кодду WhatsApp'ка жөнөтүү",
+  "whatsappCodeSent": "Код WhatsApp'ка жөнөтүлдү",
+  "whatsappCodeSendFailed": "WhatsApp кодун жөнөтүү мүмкүн болгон жок",
+  "whatsappVerifyButton": "Кодду ырастоо",
+  "enterVerificationCode": "Ырастоо кодун киргизиңиз",
+  "reviewsCount": "{count} пикир",
+  "@reviewsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "anonymous": "Аноним",
+  "hoursAgo": "{hours} саат мурун",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "minutesAgo": "{minutes} мүн. мурун",
+  "@minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "noComment": "Комментарийсиз",
+  "loadingReviewsError": "Пикирлерди жүктөө катасы: {error}",
+  "@loadingReviewsError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+
+  "upcoming": "Келечектеги",
+  "past": "Өткөн",
+  "noTitle": "Аталышсыз",
+  "notSpecified": "Көрсөтүлгөн эмес",
+  "approved": "Бекитилди",
+  "pending": "Күтүүдө",
+  "rejected": "Четке кагылды",
+  "attended": "Катышты",
+  "missed": "Катышкан жок",
+  "leaveReview": "Пикир калтыруу →",
+  "leaveReviewTitle": "Пикир калтыруу",
+  "rateEvent": "\"{title}\" иш-чарасын баалаңыз",
+  "@rateEvent": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "shareImpression": "Таасирлериңиз менен бөлүшүңүз (милдеттүү эмес)",
+  "send": "Жөнөтүү",
+  "thankYouForReview": "Пикириңиз үчүн рахмат!",
+  "error": "Ката: {error}",
+  "@error": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+
+  "onModeration": "Модерацияда",
+  "newInitiative": "Жаңы иш",
+  "loadingError": "Жүктөө катасы: {error}",
+  "@loadingError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+
+  "notificationSettings": "Билдирмелердин жөндөөлөрү",
+  "pushNotifications": "Push-билдирмелер",
+  "newEvents": "Жаңы иш-чаралар",
+  "newEventsSubtitle": "Сиздин категорияларыңыз боюнча",
+  "invitationsFromNGO": "КУУдан чакыруулар",
+  "invitationsSubtitle": "Уюм сизди чакырганда",
+  "newReviews": "Жаңы пикирлер",
+  "newReviewsSubtitle": "КУУ пикир калтырганда",
+  "whatsapp": "WhatsApp",
+  "eventReminders": "Окуялар жөнүндө эскертмелер",
+  "eventRemindersSubtitle": "Башталышына 24 саат калганда",
+
+  "languageSettings": "Язык / Тил",
+  "russian": "Орусча",
+  "russianNative": "Russian",
+  "kyrgyz": "Кыргызча",
+  "kyrgyzNative": "Kyrgyz",
+
+  "homeMenu": "Башкы",
+  "mapMenu": "Карта",
+  "talentsMenu": "Таланттар",
+  "profileMenu": "Профиль",
+  "createWhatTitle": "Эмне түзгүңүз келет?",
+  "createWhatSubtitle": "Активдүүлүктүн түрүн тандаңыз",
+  "createEventTitle": "Иш-чара",
+  "createEventSubtitle": "КУУ жана уюштуруучулар үчүн — катталуучу расмий окуялар",
+  "createInitiativeTitle": "Жакшы иш",
+  "createInitiativeSubtitle": "Шаар жана айыл тургундары үчүн — КУУсуз жергиликтүү жардам",
+  "talentsOnlyOrganizers": "уюштуруучулар үчүн гана жеткиликтүү",
+  "talentRadarOnlyForOrganizers": "Таланттар радары уюштуруучу аккаунттар үчүн гана жеткиликтүү.",
+  "talentRadarTitle": "Таланттар радары",
+  "talentRadarSubtitle": "Долбооруңуз үчүн мыкты ыктыярчыларды табыңыз",
+  "talentFoundCount": "Табылды: {count} мыкты ыктыярчы",
+  "@talentFoundCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "talentSearchHint": "Аты боюнча издөө...",
+  "talentMinRating": "Мин. рейтинг:",
+  "talentCity": "Шаар:",
+  "talentSkill": "Көндүм:",
+  "talentRadius": "Радиус: {km} км",
+  "@talentRadius": {
+    "placeholders": {
+      "km": {
+        "type": "int"
+      }
+    }
+  },
+  "talentResetFilters": "Фильтрлерди тазалоо",
+  "invite": "Чакыруу",
+  "invitePerson": "{name} чакыруу",
+  "@invitePerson": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseEventForInvite": "Чакыруу үчүн иш-чараны тандаңыз:",
+  "noEventsForInvite": "Азырынча чакыруу үчүн активдүү иш-чараларыңыз жок.",
+  "inviteProjectTitle": "Долбоорго чакыруу!",
+  "inviteProjectBody": "Уюм сизди \"{eventTitle}\" иш-чарасына чакырат.",
+  "@inviteProjectBody": {
+    "placeholders": {
+      "eventTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteSentSuccess": "✅ Чакыруу ийгиликтүү жөнөтүлдү!",
+  "inviteSendError": "Жөнөтүү катасы: {error}",
+  "@inviteSendError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "sendInvite": "Чакыруу жөнөтүү",
+  "orgShort": "КУУ",
+  "cityOsh": "Ош",
+  "cityKarakol": "Каракол",
+  "cityNaryn": "Нарын",
+  "cityJalalAbad": "Жалал-Абад",
+  "skillMedicine": "Медицина",
+  "skillPedagogy": "Педагогика",
+  "skillConstruction": "Курулуш",
+  "skillPhotography": "Сүрөткө тартуу",
+
+  "categoryEcology": "Экология",
+  "categoryEducation": "Билим берүү",
+  "categoryHealth": "Саламаттык",
+  "categorySocial": "Соц. жардам",
+  "categoryAnimals": "Жаныбарлар",
+  "categoryCulture": "Маданият",
+  "categorySport": "Спорт",
+  "categoryOther": "Башка",
+
+  "kyrgyzstan": "Кыргызстан",
+  "bishkek": "Бишкек",
+  "loading": "Жүктөлүүдө...",
+  "save": "Сактоо",
+  "cancel": "Жокко чыгаруу",
+  "add": "Кошуу",
+  "delete": "Өчүрүү",
+  "edit": "Өзгөртүү",
+  "back": "Артка",
+  "next": "Кийинки",
+  "done": "Даяр",
+  "yes": "Ооба",
+  "no": "Жок",
+  "ok": "Макул",
+  "close": "Жабуу",
+  "exportPdf": "PDF экспорт",
+  "noEntriesYet": "Азырынча жазуулар жок",
+  "dateLabel": "Дата",
+  "activityLabel": "Активдүүлүк",
+  "hoursLabel": "Саат",
+  "statusLabel": "Статус",
+
+  "recentlyViewed": "Жакында көрүлгөн",
+
+  "onboardingWelcome": "Ыктыярчыга кош келиңиз",
+  "onboardingStep1": "Окуяларды картада жана тизмеден табыңыз — фильтр менен издөө тезирээк жардам берет.",
+  "onboardingStep2": "Бир баскыч менен катталыңыз жана орундарды ээрчиңиз.",
+  "onboardingStep3": "Эскертүүлөр жана көрүү тарыхы сизди кабардар кармайт.",
+  "onboardingGetStarted": "Баштоо",
+
+  "shareEventSubject": "Окуя: {title}",
+  "@shareEventSubject": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "shareEventBody": "{title}\n\n{detail}",
+  "@shareEventBody": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+
+  "mapQuickFiltersHint": "Тез фильтрлер",
+  "loadingMore": "Дагы жүктөлүүдө..."
+}

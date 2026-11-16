@@ -1,0 +1,44 @@
+Django==5.0.3
+djangorestframework==3.15.1
+djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.3.1
+django-filter==24.2
+django-simple-history==3.4.0
+Pillow>=10.0.0
+psycopg2-binary==2.9.9
+python-dotenv==1.0.1
+python-dateutil==2.8.2
+qrcode[pil]==7.4.2
+reportlab==4.0.7
+celery==5.3.4
+redis==5.0.1
+django-redis==5.4.0
+hiredis==2.3.2
+firebase-admin==6.5.0
+django-storages[s3]
+boto3
+bleach==6.1.0
+drf-spectacular==0.27.1
+
+# Testing dependencies
+pytest==8.1.1
+pytest-django==4.8.0
+pytest-cov==5.0.0
+factory-boy==3.3.0
+faker==24.4.0
+freezegun==1.4.0
+
+# Code quality
+flake8==7.0.0
+black==24.3.0
+isort==5.13.2
+
+# Performance testing
+locust==2.24.0
+
+# Monitoring (#98)
+django-prometheus==2.3.1
+python-json-logger==2.0.7
+gunicorn==21.2.0
+whitenoise==6.7.0
+dj-database-url==2.2.0

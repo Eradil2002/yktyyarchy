@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "975416136920",
+    "project_id": "volontiring",
+    "storage_bucket": "volontiring.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975416136920:android:8acdc29278405ab4d573ad",
+        "android_client_info": {
+          "package_name": "com.example.volunteering"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ81NZHtKCKA_j399tVjB59aGiyhO7Ir4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975416136920:android:79b327fd412fe2a8d573ad",
+        "android_client_info": {
+          "package_name": "kg.volunteers.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ81NZHtKCKA_j399tVjB59aGiyhO7Ir4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
