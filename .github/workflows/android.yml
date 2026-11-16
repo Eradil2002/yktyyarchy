@@ -20,7 +20,7 @@ jobs:
       HAS_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
@@ -45,7 +45,7 @@ jobs:
 
       - name: Build APK
         run: |
-          flutter build apk --release \
+          flutter build apk --release --android-skip-build-dependency-validation \
             --build-number=${{ github.run_number }} \
             --dart-define=API_URL=${{ vars.API_URL || 'https://yktyyarchy-api.onrender.com/api/v1/' }}
           cp build/app/outputs/flutter-apk/app-release.apk yktyyarchy.apk
