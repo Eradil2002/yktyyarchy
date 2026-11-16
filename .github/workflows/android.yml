@@ -1,0 +1,62 @@
+# Сборка APK для Android и публикация в GitHub Releases (тег android-latest)
+name: Android APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-apk
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    env:
+      HAS_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+
+      # Optional stable signing: add repo secrets ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD,
+      # ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD. Without them the APK is signed with a debug key.
+      - name: Configure release signing (if secrets exist)
+        env:
+          KS: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KS_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        if: env.HAS_KEYSTORE == 'true'
+        run: |
+          echo "$KS" | base64 -d > android/app/upload-keystore.jks
+          printf 'storeFile=upload-keystore.jks\nstorePassword=%s\nkeyAlias=%s\nkeyPassword=%s\n' "$KS_PASS" "$KEY_ALIAS" "$KEY_PASS" > android/key.properties
+
+      - name: Build APK
+        run: |
+          flutter build apk --release \
+            --build-number=${{ github.run_number }} \
+            --dart-define=API_URL=${{ vars.API_URL || 'https://yktyyarchy-api.onrender.com/api/v1/' }}
+          cp build/app/outputs/flutter-apk/app-release.apk yktyyarchy.apk
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-latest
+          name: "Ыктыярчы — Android (сборка ${{ github.run_number }})"
+          body: |
+            Скачайте **yktyyarchy.apk** на телефоне и установите (разрешите установку из неизвестных источников).
+            Сборка из коммита ${{ github.sha }}.
+          files: yktyyarchy.apk
+          make_latest: true

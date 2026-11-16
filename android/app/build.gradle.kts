@@ -61,7 +61,9 @@ android {
     buildTypes {
         release {
             if (!keystorePropertiesFile.exists()) {
-                logger.warn("⚠️ Missing key.properties for release signing. Release build will fail or be unsigned. See RELEASE_SIGNING.md")
+                // No upload keystore: sign with the debug key so the APK is installable (sideload/testing)
+                logger.warn("⚠️ Missing key.properties: release APK is signed with the DEBUG key (OK for testing, not for Play Store)")
+                signingConfig = signingConfigs.getByName("debug")
             } else {
                 signingConfig = signingConfigs.getByName("release")
             }
