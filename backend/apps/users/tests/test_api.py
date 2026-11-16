@@ -20,13 +20,13 @@ class TestRegisterAPI:
             'username': 'newvolunteer',
             'email': 'volunteer@example.com',
             'password': 'SecurePass123!',
-            'password2': 'SecurePass123!',
+            'password_confirm': 'SecurePass123!',
             'first_name': 'John',
             'last_name': 'Doe',
             'role': 'volunteer'
         }
 
-        response = api_client.post('/api/v1/auth/register/', data, format='json')
+        response = api_client.post('/api/v1/users/auth/register/', data, format='json')
         assert response.status_code == 201
         assert 'access' in response.data
         assert 'refresh' in response.data
@@ -38,13 +38,14 @@ class TestRegisterAPI:
             'username': 'newngo',
             'email': 'ngo@example.com',
             'password': 'SecurePass123!',
-            'password2': 'SecurePass123!',
+            'password_confirm': 'SecurePass123!',
             'first_name': 'Green',
             'last_name': 'NGO',
-            'role': 'ngo'
+            'role': 'ngo',
+            'org_name': 'Green NGO'
         }
 
-        response = api_client.post('/api/v1/auth/register/', data, format='json')
+        response = api_client.post('/api/v1/users/auth/register/', data, format='json')
         assert response.status_code == 201
         user = User.objects.get(username='newngo')
         assert user.role == 'ngo'
@@ -55,13 +56,13 @@ class TestRegisterAPI:
             'username': 'testuser',
             'email': 'test@example.com',
             'password': 'SecurePass123!',
-            'password2': 'DifferentPass123!',
+            'password_confirm': 'DifferentPass123!',
             'first_name': 'Test',
             'last_name': 'User',
             'role': 'volunteer'
         }
 
-        response = api_client.post('/api/v1/auth/register/', data, format='json')
+        response = api_client.post('/api/v1/users/auth/register/', data, format='json')
         assert response.status_code == 400
 
     def test_register_duplicate_username(self, api_client, volunteer_user):
@@ -70,13 +71,13 @@ class TestRegisterAPI:
             'username': volunteer_user.username,
             'email': 'newemail@example.com',
             'password': 'SecurePass123!',
-            'password2': 'SecurePass123!',
+            'password_confirm': 'SecurePass123!',
             'first_name': 'Test',
             'last_name': 'User',
             'role': 'volunteer'
         }
 
-        response = api_client.post('/api/v1/auth/register/', data, format='json')
+        response = api_client.post('/api/v1/users/auth/register/', data, format='json')
         assert response.status_code == 400
 
     def test_register_duplicate_email(self, api_client, volunteer_user):
@@ -85,13 +86,13 @@ class TestRegisterAPI:
             'username': 'newusername',
             'email': volunteer_user.email,
             'password': 'SecurePass123!',
-            'password2': 'SecurePass123!',
+            'password_confirm': 'SecurePass123!',
             'first_name': 'Test',
             'last_name': 'User',
             'role': 'volunteer'
         }
 
-        response = api_client.post('/api/v1/auth/register/', data, format='json')
+        response = api_client.post('/api/v1/users/auth/register/', data, format='json')
         assert response.status_code == 400
 
     def test_register_weak_password(self, api_client):
@@ -100,13 +101,13 @@ class TestRegisterAPI:
             'username': 'testuser',
             'email': 'test@example.com',
             'password': '123',
-            'password2': '123',
+            'password_confirm': '123',
             'first_name': 'Test',
             'last_name': 'User',
             'role': 'volunteer'
         }
 
-        response = api_client.post('/api/v1/auth/register/', data, format='json')
+        response = api_client.post('/api/v1/users/auth/register/', data, format='json')
         assert response.status_code == 400
 
 
@@ -122,7 +123,7 @@ class TestLoginAPI:
             'password': 'testpass123'
         }
 
-        response = api_client.post('/api/v1/auth/login/', data, format='json')
+        response = api_client.post('/api/v1/users/auth/login/', data, format='json')
         assert response.status_code == 200
         assert 'access' in response.data
         assert 'refresh' in response.data
@@ -134,7 +135,7 @@ class TestLoginAPI:
             'password': 'wrongpassword'
         }
 
-        response = api_client.post('/api/v1/auth/login/', data, format='json')
+        response = api_client.post('/api/v1/users/auth/login/', data, format='json')
         assert response.status_code in [400, 401]
 
     def test_login_nonexistent_user(self, api_client):
@@ -144,7 +145,7 @@ class TestLoginAPI:
             'password': 'somepassword'
         }
 
-        response = api_client.post('/api/v1/auth/login/', data, format='json')
+        response = api_client.post('/api/v1/users/auth/login/', data, format='json')
         assert response.status_code in [400, 401]
 
 
@@ -162,7 +163,7 @@ class TestEmailVerificationAPI:
         volunteer_user.save()
 
         data = {'code': '123456'}
-        response = authenticated_client.post('/api/v1/auth/verify-email/', data, format='json')
+        response = authenticated_client.post('/api/v1/users/auth/verify-email/', data, format='json')
         assert response.status_code == 200
 
         volunteer_user.refresh_from_db()
@@ -176,7 +177,7 @@ class TestEmailVerificationAPI:
         volunteer_user.save()
 
         data = {'code': '999999'}
-        response = authenticated_client.post('/api/v1/auth/verify-email/', data, format='json')
+        response = authenticated_client.post('/api/v1/users/auth/verify-email/', data, format='json')
         assert response.status_code == 400
 
     def test_verify_email_expired_code(self, authenticated_client, volunteer_user):
@@ -187,7 +188,7 @@ class TestEmailVerificationAPI:
         volunteer_user.save()
 
         data = {'code': '123456'}
-        response = authenticated_client.post('/api/v1/auth/verify-email/', data, format='json')
+        response = authenticated_client.post('/api/v1/users/auth/verify-email/', data, format='json')
         assert response.status_code == 400
 
     def test_verify_email_already_verified(self, authenticated_client, volunteer_user):
@@ -196,7 +197,7 @@ class TestEmailVerificationAPI:
         volunteer_user.save()
 
         data = {'code': '123456'}
-        response = authenticated_client.post('/api/v1/auth/verify-email/', data, format='json')
+        response = authenticated_client.post('/api/v1/users/auth/verify-email/', data, format='json')
         assert response.status_code == 400
 
 

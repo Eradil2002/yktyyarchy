@@ -15,6 +15,8 @@ class TestEventListAPI:
     def test_list_events_unauthenticated(self, api_client, ngo_user):
         """Test listing events without authentication."""
         Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Public Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -33,6 +35,8 @@ class TestEventListAPI:
         # Create multiple events
         for i in range(15):
             Event.objects.create(
+                description='Test description',
+                category='ecology',
                 title=f'Event {i}',
                 organizer=ngo_user,
                 date=timezone.now() + timedelta(days=i+1),
@@ -49,6 +53,7 @@ class TestEventListAPI:
     def test_filter_events_by_category(self, api_client, ngo_user):
         """Test filtering events by category."""
         Event.objects.create(
+            description='Test description',
             title='Ecology Event',
             organizer=ngo_user,
             category='ecology',
@@ -58,6 +63,7 @@ class TestEventListAPI:
             spots_total=10
         )
         Event.objects.create(
+            description='Test description',
             title='Education Event',
             organizer=ngo_user,
             category='education',
@@ -75,6 +81,8 @@ class TestEventListAPI:
     def test_filter_events_by_type(self, api_client, ngo_user):
         """Test filtering events by type."""
         Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Online Event',
             organizer=ngo_user,
             type='online',
@@ -84,6 +92,8 @@ class TestEventListAPI:
             spots_total=10
         )
         Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Offline Event',
             organizer=ngo_user,
             type='offline',
@@ -101,6 +111,8 @@ class TestEventListAPI:
     def test_filter_events_by_urgent(self, api_client, ngo_user):
         """Test filtering urgent events."""
         Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Urgent Event',
             organizer=ngo_user,
             is_urgent=True,
@@ -110,6 +122,8 @@ class TestEventListAPI:
             spots_total=10
         )
         Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Normal Event',
             organizer=ngo_user,
             is_urgent=False,
@@ -127,6 +141,8 @@ class TestEventListAPI:
     def test_search_events(self, api_client, ngo_user):
         """Test searching events by title."""
         Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Tree Planting Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -135,6 +151,8 @@ class TestEventListAPI:
             spots_total=10
         )
         Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Beach Cleanup',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=2),
@@ -189,6 +207,8 @@ class TestEventDetailAPI:
     def test_get_event_detail(self, api_client, ngo_user):
         """Test retrieving event details."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -215,6 +235,8 @@ class TestEventUpdateAPI:
     def test_update_event_as_organizer(self, ngo_authenticated_client, ngo_user):
         """Test updating event as organizer."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Original Title',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -231,6 +253,8 @@ class TestEventUpdateAPI:
     def test_update_event_as_different_ngo(self, api_client, ngo_user):
         """Test updating event as different NGO."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Original Title',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -263,6 +287,8 @@ class TestEventDeleteAPI:
     def test_delete_event_as_organizer(self, ngo_authenticated_client, ngo_user):
         """Test deleting event as organizer."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='To Delete',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),

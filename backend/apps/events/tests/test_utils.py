@@ -21,8 +21,8 @@ class TestHaversineFunction:
 
         distance = haversine(bishkek_lat, bishkek_lon, osh_lat, osh_lon)
 
-        # Distance should be approximately 400-450 km
-        assert 350 < distance < 500
+        # Great-circle distance Bishkek-Osh is ~300 km (road is ~600 km)
+        assert 280 < distance < 320
 
     def test_haversine_with_none_values(self):
         """Test haversine returns infinity for None values."""

@@ -1322,7 +1322,9 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.achievements)),
       backgroundColor: AppColors.background,
-      body: Padding(
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
         padding: const EdgeInsets.all(16),
         child: GridView.builder(
           itemCount: achievements.length,

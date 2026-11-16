@@ -10,6 +10,11 @@ from django.utils import timezone
 from datetime import timedelta
 import time
 import random
+import logging
+from django.conf import settings
+from rest_framework_simplejwt.exceptions import TokenError
+
+logger = logging.getLogger(__name__)
 from .models import CustomUser
 from .serializers import (
     RegisterSerializer, UserSerializer, EmailVerificationSerializer,
@@ -26,7 +31,7 @@ from .utils import (
 from .security_log import log_security_event
 from .throttling import (
     IPBasedLoginThrottle, IPBasedRegisterThrottle,
-    IPBasedPasswordResetThrottle, IPBasedOTPThrottle,
+    IPBasedPasswordResetThrottle, IPBasedOTPThrottle, PasswordResetConfirmThrottle,
     check_failed_login_attempts, record_failed_login,
     clear_failed_login_attempts
 )
@@ -64,7 +69,7 @@ class RegisterView(generics.CreateAPIView):
         try:
             send_email_verification(user, verification_code)
         except Exception as e:
-            print(f"Failed to send verification email: {e}")
+            logger.warning("Failed to send verification email: %s", e)
 
         refresh = RefreshToken.for_user(user)
         return Response({
@@ -130,8 +135,9 @@ class ResendVerificationCodeView(APIView):
         try:
             send_email_verification(user, verification_code)
             return Response({'detail': 'Код подтверждения отправлен на email.'}, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({'detail': f'Ошибка отправки email: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception:
+            logger.exception('Email verification send failed')
+            return Response({'detail': 'Не удалось отправить письмо. Попробуйте позже.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class PasswordResetRequestView(APIView):
@@ -149,8 +155,8 @@ class PasswordResetRequestView(APIView):
 
         try:
             user = CustomUser.objects.get(email=email)
-            # Frontend URL should be passed or configured
-            reset_url_base = request.data.get('reset_url', 'http://localhost:3000/reset-password')
+            # Link base comes ONLY from server config (client-supplied reset_url is ignored: prevents reset-link poisoning)
+            reset_url_base = f"{settings.FRONTEND_URL}/#/reset-password"
             send_password_reset_email(user, reset_url_base)
 
             # Log password reset request
@@ -167,6 +173,7 @@ class PasswordResetRequestView(APIView):
 
 class PasswordResetConfirmView(APIView):
     permission_classes = (permissions.AllowAny,)
+    throttle_classes = [PasswordResetConfirmThrottle]
 
     def post(self, request):
         serializer = PasswordResetConfirmSerializer(data=request.data)
@@ -186,6 +193,14 @@ class PasswordResetConfirmView(APIView):
 
         user.set_password(serializer.validated_data['new_password'])
         user.save()
+
+        # Revoke all existing refresh tokens of this user after password change
+        try:
+            from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
+            for t in OutstandingToken.objects.filter(user=user):
+                BlacklistedToken.objects.get_or_create(token=t)
+        except Exception:
+            logger.exception('Failed to revoke tokens after password reset')
 
         # Log successful password reset
         log_security_event('password_reset_complete', request=request, user=user, details={'status': 'success'})
@@ -398,3 +413,40 @@ class RegisterFCMTokenView(APIView):
                 NGOProfile.objects.create(user=user, org_name='', fcm_token=fcm_token)
 
         return Response({'detail': 'FCM токен успешно зарегистрирован'})
+
+
+class LogoutView(APIView):
+    """Blacklist the given refresh token so it can no longer be used."""
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request):
+        refresh = request.data.get('refresh')
+        if not refresh:
+            return Response({'detail': 'refresh token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            token = RefreshToken(refresh)
+            if str(token.get('user_id')) != str(request.user.pk):
+                return Response({'detail': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+            token.blacklist()
+        except TokenError:
+            return Response({'detail': 'Invalid or expired token.'}, status=status.HTTP_400_BAD_REQUEST)
+        log_security_event('logout', request=request, user=request.user)
+        return Response(status=status.HTTP_205_RESET_CONTENT)
+
+
+class PublicStatsView(APIView):
+    """Real platform counters for the welcome screen (cached 10 min)."""
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request):
+        from django.core.cache import cache
+        from apps.events.models import Event
+        data = cache.get('public_stats')
+        if data is None:
+            data = {
+                'volunteers': CustomUser.objects.filter(role='volunteer', is_active=True).count(),
+                'organizations': CustomUser.objects.filter(role='ngo', is_active=True).count(),
+                'events': Event.objects.count(),
+            }
+            cache.set('public_stats', data, 600)
+        return Response(data)

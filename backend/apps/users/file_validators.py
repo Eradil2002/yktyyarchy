@@ -59,7 +59,7 @@ def validate_image_file(file):
             )
 
     except Exception as e:
-        raise ValidationError(_('Ошибка при обработке изображения: ') + str(e))
+        raise ValidationError(_('Не удалось обработать изображение. Загрузите корректный файл JPG/PNG/WebP.'))
 
 
 def validate_avatar(file):
@@ -94,7 +94,7 @@ def validate_avatar(file):
             )
 
     except Exception as e:
-        raise ValidationError(_('Ошибка при обработке аватара: ') + str(e))
+        raise ValidationError(_('Не удалось обработать аватар. Загрузите корректный файл JPG/PNG/WebP.'))
 
 
 def validate_event_image(file):

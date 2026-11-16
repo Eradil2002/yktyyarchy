@@ -12,7 +12,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
-        read_only_fields = ('reviewer', 'created_at')
+        read_only_fields = ('reviewer', 'created_at', 'moderation_status', 'moderated_by', 'moderated_at', 'moderation_reason', 'is_from_ngo')
 
     def get_links(self, obj):
         request = self.context.get('request')

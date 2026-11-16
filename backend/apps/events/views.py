@@ -1,3 +1,4 @@
+from apps.users.permissions import IsOwnerOrReadOnly
 import math
 from rest_framework import viewsets, permissions, status, filters
 from rest_framework.decorators import action
@@ -40,7 +41,9 @@ class IsNGOOrReadOnly(permissions.BasePermission):
 
 class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
-    permission_classes = [IsNGOOrReadOnly]
+    # NGO role to create; only the organizer (or staff) may edit/delete
+    permission_classes = [IsNGOOrReadOnly, IsOwnerOrReadOnly]
+    owner_field = 'organizer'
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['category', 'type', 'status', 'is_urgent', 'organizer']
     search_fields = ['title', 'description', 'location', 'category']

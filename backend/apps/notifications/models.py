@@ -1,9 +1,12 @@
+import logging
 from django.db import models
 from django.conf import settings
 from firebase_admin import messaging
 from rest_framework import serializers
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
+
+logger = logging.getLogger(__name__)
 
 class FCMDevice(models.Model):
     user = models.ForeignKey(
@@ -31,7 +34,7 @@ class FCMDevice(models.Model):
             return response
         except Exception as e:
             # Token might be invalid/expired, usually we'd delete it here in a real app
-            print(f"Error sending push: {e}")
+            logger.warning(f"Error sending push: {e}")
             return None
 
 class Notification(models.Model):
@@ -71,9 +74,9 @@ class Notification(models.Model):
                     try:
                         device.send_notification(self.title, self.body, self.data)
                     except Exception as e:
-                        print(f"Failed to send notification to device {device.id}: {e}")
+                        logger.warning(f"Failed to send notification to device {device.id}: {e}")
             except Exception as e:
-                print(f"Failed to send push notifications: {e}")
+                logger.warning(f"Failed to send push notifications: {e}")
 
 
 @receiver(pre_delete, sender=settings.AUTH_USER_MODEL)
@@ -86,9 +89,9 @@ def cleanup_fcm_tokens(sender, instance, **kwargs):
                 # Unregister token from Firebase
                 messaging.unsubscribe_from_topic([device.registration_id], 'all_users')
             except Exception as e:
-                print(f"Failed to unregister FCM token {device.registration_id}: {e}")
+                logger.warning(f"Failed to unregister FCM token {device.registration_id}: {e}")
     except Exception as e:
-        print(f"Failed to cleanup FCM tokens for user {instance.id}: {e}")
+        logger.warning(f"Failed to cleanup FCM tokens for user {instance.id}: {e}")
 
 
 class ChatRoom(models.Model):

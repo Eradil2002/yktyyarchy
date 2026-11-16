@@ -1,3 +1,4 @@
+from apps.users.permissions import IsOwnerOrReadOnly
 from rest_framework import viewsets, permissions, status, serializers, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -10,8 +11,9 @@ from apps.users.models import CustomUser
 from apps.events.models import EventRegistration
 
 class ReviewViewSet(viewsets.ModelViewSet):
+    owner_field = 'reviewer'
     serializer_class = ReviewSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['moderation_status', 'rating', 'is_from_ngo', 'target_user', 'reviewer']
     search_fields = ['text']
@@ -57,7 +59,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
                 'Вы можете оставить отзыв только участникам мероприятий, в которых вы участвовали вместе.'
             )
 
-        review = serializer.save(reviewer=reviewer)
+        review = serializer.save(reviewer=reviewer, is_from_ngo=(getattr(reviewer, 'role', None) == 'ngo'))
 
         # Update target user rating (only count approved reviews)
         target = review.target_user

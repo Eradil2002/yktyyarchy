@@ -96,3 +96,11 @@ SPLASH_SCREEN_SETUP.md
 VERSIONING_GUIDE.md
 CHANGELOG.md
 full_project_audit.md
+
+# local check logs
+.check_*
+.stale_tests/
+htmlcov/
+coverage.xml
+.coverage
+.coverage*

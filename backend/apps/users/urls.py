@@ -6,7 +6,7 @@ from .views import (
     EmailVerificationView, ResendVerificationCodeView,
     PasswordResetRequestView, PasswordResetConfirmView,
     WhatsAppOTPRequestView, WhatsAppOTPVerifyView, ExportVolunteerBookView,
-    RegisterFCMTokenView
+    RegisterFCMTokenView, LogoutView, PublicStatsView
 )
 
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     path('auth/register/', RegisterView.as_view(), name='register'),
     path('auth/login/', CustomTokenObtainPairView.as_view(), name='login'),
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth/logout/', LogoutView.as_view(), name='logout'),
 
     # Email verification
     path('auth/verify-email/', EmailVerificationView.as_view(), name='verify_email'),
@@ -29,6 +30,7 @@ urlpatterns = [
     path('me/', UserProfileView.as_view(), name='my_profile'),
     path('me/export-pdf/', ExportVolunteerBookView.as_view(), name='export_volunteer_book'),
     path('me/register-fcm/', RegisterFCMTokenView.as_view(), name='register_fcm_token'),
+    path('public-stats/', PublicStatsView.as_view(), name='public_stats'),
     path('volunteers/', VolunteerListView.as_view(), name='volunteer_list'),
     path('<int:pk>/', UserDetailView.as_view(), name='user_detail'),
 ]

@@ -22,17 +22,15 @@ class TestInitiativesAPI:
             'title': 'New Initiative',
             'description': 'Test description',
             'category': 'ecology',
+            'location': 'Bishkek',
             'start_date': (timezone.now() + timedelta(days=1)).isoformat(),
             'end_date': (timezone.now() + timedelta(days=30)).isoformat(),
         }
         response = ngo_authenticated_client.post('/api/v1/initiatives/', data, format='json')
         assert response.status_code in [200, 201]
 
-    def test_create_initiative_as_volunteer_forbidden(self, authenticated_client):
-        """Test volunteers cannot create initiatives."""
-        data = {
-            'title': 'New Initiative',
-            'description': 'Test description',
-        }
-        response = authenticated_client.post('/api/v1/initiatives/', data, format='json')
-        assert response.status_code == 403
+    def test_create_initiative_unauthenticated_forbidden(self, api_client):
+        """Anonymous users cannot create initiatives."""
+        data = {'title': 'New Initiative', 'description': 'Test description', 'category': 'ecology', 'location': 'Bishkek'}
+        response = api_client.post('/api/v1/initiatives/', data, format='json')
+        assert response.status_code == 401

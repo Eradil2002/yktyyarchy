@@ -22,12 +22,14 @@ class NotificationService {
   bool get isAvailable => isFirebaseAvailable && _isInitialized;
 
   Future<void> initialize() async {
+    // Push (FCM + local notifications) is not configured for the web build
+    if (kIsWeb) return;
     await _initializeLocalNotifications();
 
     // Skip initialization if Firebase is not available
     if (!isFirebaseAvailable || _fcm == null) {
       if (kDebugMode) {
-        print('⚠ Push notifications disabled: Firebase not available');
+        debugPrint('⚠ Push notifications disabled: Firebase not available');
       }
       return;
     }
@@ -42,13 +44,13 @@ class NotificationService {
 
       if (settings.authorizationStatus == AuthorizationStatus.authorized) {
         if (kDebugMode) {
-          print('✓ User granted notification permission');
+          debugPrint('✓ User granted notification permission');
         }
 
         // Handle foreground messages
         FirebaseMessaging.onMessage.listen((RemoteMessage message) {
           if (kDebugMode) {
-            print('Received foreground message: ${message.notification?.title}');
+            debugPrint('Received foreground message: ${message.notification?.title}');
           }
           _showForegroundNotification(message);
         });
@@ -56,19 +58,19 @@ class NotificationService {
         // Handle when app is opened from notification
         FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
           if (kDebugMode) {
-            print('App opened from notification: ${message.data}');
+            debugPrint('App opened from notification: ${message.data}');
           }
         });
 
         _isInitialized = true;
       } else {
         if (kDebugMode) {
-          print('⚠ User denied notification permission');
+          debugPrint('⚠ User denied notification permission');
         }
       }
     } catch (e) {
       if (kDebugMode) {
-        print('⚠ Error initializing notifications: $e');
+        debugPrint('⚠ Error initializing notifications: $e');
       }
     }
   }
@@ -123,10 +125,11 @@ class NotificationService {
   }
 
   Future<void> registerDevice() async {
+    if (kIsWeb) return; // FCM is not configured for web
     // Skip if Firebase is not available
     if (!isFirebaseAvailable || _fcm == null) {
       if (kDebugMode) {
-        print('⚠ Device registration skipped: Firebase not available');
+        debugPrint('⚠ Device registration skipped: Firebase not available');
       }
       return;
     }
@@ -135,7 +138,7 @@ class NotificationService {
       String? token = await _fcm!.getToken();
       if (token != null) {
         if (kDebugMode) {
-          print('FCM Token: $token');
+          debugPrint('FCM token received');
         }
 
         // Send token to backend
@@ -145,12 +148,12 @@ class NotificationService {
         });
 
         if (kDebugMode) {
-          print('✓ Device registered for push notifications');
+          debugPrint('✓ Device registered for push notifications');
         }
       }
     } catch (e) {
       if (kDebugMode) {
-        print('⚠ Error registering device: $e');
+        debugPrint('⚠ Error registering device: $e');
       }
     }
   }

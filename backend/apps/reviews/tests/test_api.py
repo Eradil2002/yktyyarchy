@@ -21,6 +21,8 @@ class TestReviewsAPI:
         """Test creating a review."""
         # Create event and registration
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() - timedelta(days=1),
@@ -35,20 +37,37 @@ class TestReviewsAPI:
             status='attended'
         )
 
+        from django.contrib.auth import get_user_model
+        teammate = get_user_model().objects.create_user(username='teammate', email='tm@test.com', password='pass', role='volunteer')
+        EventRegistration.objects.create(event=event, volunteer=teammate, status='attended')
+
         data = {
+            'target_user': teammate.id,
             'event': event.id,
             'rating': 5,
-            'comment': 'Great event!'
+            'text': 'Great teammate!'
         }
         response = authenticated_client.post('/api/v1/reviews/', data, format='json')
-        assert response.status_code in [200, 201]
+        assert response.status_code == 201, response.data
+        assert response.data['moderation_status'] == 'approved'
+
+    def test_cannot_edit_others_review(self, authenticated_client, volunteer_user, ngo_user):
+        """IDOR guard: a user cannot modify someone else's review."""
+        from apps.reviews.models import Review
+        from django.contrib.auth import get_user_model
+        U = get_user_model()
+        a = U.objects.create_user(username='a1', email='a1@t.com', password='p', role='volunteer')
+        b = U.objects.create_user(username='b1', email='b1@t.com', password='p', role='volunteer')
+        review = Review.objects.create(reviewer=a, target_user=b, rating=5, text='ok')
+        response = authenticated_client.patch(f'/api/v1/reviews/{review.id}/', {'rating': 1}, format='json')
+        assert response.status_code in (403, 404)
 
     def test_create_review_unauthenticated(self, api_client):
         """Test creating review without authentication."""
         data = {
-            'event': 1,
+            'target_user': 1,
             'rating': 5,
-            'comment': 'Test'
+            'text': 'Test'
         }
         response = api_client.post('/api/v1/reviews/', data, format='json')
         assert response.status_code == 401

@@ -153,7 +153,7 @@ def send_whatsapp_otp(phone_number, code):
         logger.error(f"Green API request error: {e}")
         return {
             'success': False,
-            'message': f'Ошибка при отправке: {str(e)}'
+            'message': 'Ошибка при отправке WhatsApp сообщения'
         }
     except Exception as e:
         logger.error(f"Unexpected error sending WhatsApp OTP: {e}")

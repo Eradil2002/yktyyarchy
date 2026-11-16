@@ -162,10 +162,8 @@ class AuthService {
     try {
       final response = await _apiClient.dio.post(
         'users/auth/password-reset/',
-        data: {
-          'email': email,
-          'reset_url': 'https://volunteers.kg/reset-password',
-        },
+        // Reset link base URL is configured on the server (FRONTEND_URL)
+        data: {'email': email},
       );
 
       if (response.statusCode == 200) {
@@ -241,7 +239,42 @@ class AuthService {
   }
 
   Future<void> logout() async {
-    await _apiClient.clearTokens();
+    // Revoke the refresh token on the server, then clear local tokens
+    try {
+      final refresh = await _apiClient.getRefreshToken();
+      if (refresh != null) {
+        await _apiClient.dio.post('users/auth/logout/', data: {'refresh': refresh});
+      }
+    } catch (_) {
+      // Ignore network errors: local logout must always succeed
+    } finally {
+      await _apiClient.clearTokens();
+    }
+  }
+
+  Future<Map<String, dynamic>> confirmPasswordReset({
+    required String uid,
+    required String token,
+    required String password,
+    required String passwordConfirm,
+  }) async {
+    try {
+      final response = await _apiClient.dio.post(
+        'users/auth/password-reset-confirm/',
+        data: {
+          'uid': uid,
+          'token': token,
+          'new_password': password,
+          'new_password_confirm': passwordConfirm,
+        },
+      );
+      return {'success': response.statusCode == 200, 'message': response.data['detail']};
+    } on DioException catch (e) {
+      return {
+        'success': false,
+        'error': ApiClient.formatError(e, fallback: 'Не удалось сменить пароль'),
+      };
+    }
   }
 
   Future<bool> isLoggedIn() async {

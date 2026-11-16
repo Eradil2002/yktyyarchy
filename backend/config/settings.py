@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     # Third party apps
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'django_filters',
     'simple_history',
@@ -334,7 +335,18 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     'AUTH_HEADER_TYPES': ('Bearer',),
+    # Rotation + blacklist: logout and stolen refresh tokens can be revoked
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': True,
 }
+
+# Frontend base URL for links in emails (never taken from the request -> no reset-link poisoning)
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:5050').rstrip('/')
+# Admin URL path (set a non-default value in production)
+ADMIN_URL = os.getenv('ADMIN_URL', 'admin/').strip('/') + '/'
+# Public API docs/metrics only in DEBUG unless explicitly enabled
+EXPOSE_API_DOCS = DEBUG or os.getenv('EXPOSE_API_DOCS', 'False') == 'True'
 
 # Email Configuration
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
@@ -365,7 +377,7 @@ if os.path.exists(FIREBASE_CERT_PATH):
     cred = credentials.Certificate(FIREBASE_CERT_PATH)
     firebase_admin.initialize_app(cred)
 else:
-    print(f"WARNING: Firebase service account file not found at {FIREBASE_CERT_PATH}")
+    import logging; logging.getLogger(__name__).warning("Firebase service account file not found at %s", FIREBASE_CERT_PATH)
 
 
 # Celery Configuration
@@ -449,3 +461,10 @@ LOGGING = {
         },
     },
 }
+
+# Throttle rate for password-reset confirmation (token brute force)
+REST_FRAMEWORK.setdefault('DEFAULT_THROTTLE_RATES', {})
+REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'].setdefault('password_reset_confirm', '100/minute' if DEBUG else '10/hour')
+
+# Keep existing integer PKs explicit (silences models.W042)
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

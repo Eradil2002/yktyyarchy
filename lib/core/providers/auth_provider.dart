@@ -37,13 +37,13 @@ class AuthProvider with ChangeNotifier, ErrorHandlingMixin {
         // Register device in background without blocking
         _notificationService?.registerDevice().catchError((e) {
           if (kDebugMode) {
-            print('Device registration failed: $e');
+            debugPrint('Device registration failed: $e');
           }
         });
       }
     } catch (e) {
       if (kDebugMode) {
-        print('Error checking auth status: $e');
+        debugPrint('Error checking auth status: $e');
       }
       _isAuthenticated = false;
     }
@@ -66,7 +66,7 @@ class AuthProvider with ChangeNotifier, ErrorHandlingMixin {
         // Register device in background without blocking login
         _notificationService?.registerDevice().catchError((e) {
           if (kDebugMode) {
-            print('Device registration failed: $e');
+            debugPrint('Device registration failed: $e');
           }
         });
         _isLoading = false;
@@ -120,7 +120,7 @@ class AuthProvider with ChangeNotifier, ErrorHandlingMixin {
         // Register device in background without blocking
         _notificationService?.registerDevice().catchError((e) {
           if (kDebugMode) {
-            print('Device registration failed: $e');
+            debugPrint('Device registration failed: $e');
           }
         });
         _isLoading = false;
@@ -231,7 +231,7 @@ class AuthProvider with ChangeNotifier, ErrorHandlingMixin {
           return;
         }
         if (kDebugMode) {
-          print('Failed to load user profile');
+          debugPrint('Failed to load user profile');
         }
       }
     } catch (e) {
@@ -242,7 +242,7 @@ class AuthProvider with ChangeNotifier, ErrorHandlingMixin {
         return;
       }
       if (kDebugMode) {
-        print('Error loading user profile: $e');
+        debugPrint('Error loading user profile: $e');
       }
     }
   }

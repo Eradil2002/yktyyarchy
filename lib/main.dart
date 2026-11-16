@@ -25,6 +25,7 @@ import 'package:volunteering/core/providers/locale_provider.dart';
 
 // Feature screens
 import 'package:volunteering/features/welcome/screens/welcome_screen.dart';
+import 'package:volunteering/features/auth/screens/reset_password_screen.dart';
 import 'package:volunteering/features/auth/screens/login_screen.dart';
 import 'package:volunteering/features/auth/screens/whatsapp_login_screen.dart';
 import 'package:volunteering/features/auth/screens/register_screen.dart';
@@ -36,9 +37,7 @@ import 'package:volunteering/features/profile/screens/achievements_screen.dart';
 import 'package:volunteering/features/reviews/screens/reviews_screen.dart';
 import 'package:volunteering/features/events/screens/my_events_screen.dart';
 import 'package:volunteering/features/initiatives/screens/my_initiatives_screen.dart';
-import 'package:volunteering/features/profile/screens/edit_profile_screen.dart';
 import 'package:volunteering/features/profile/screens/ngo_profile_screen.dart';
-import 'package:volunteering/features/profile/screens/volunteer_book_screen.dart';
 import 'package:volunteering/features/talents/screens/volunteer_profile_screen.dart';
 import 'package:volunteering/features/notifications/screens/notification_settings_screen.dart';
 import 'package:volunteering/features/profile/screens/language_settings_screen.dart';
@@ -46,7 +45,6 @@ import 'package:volunteering/features/legal/screens/privacy_policy_screen.dart';
 import 'package:volunteering/features/legal/screens/terms_of_service_screen.dart';
 
 import 'package:volunteering/l10n/app_localizations.dart';
-import 'package:volunteering/core/utils/debug_i18n_logger.dart';
 import 'package:volunteering/data/models/models.dart';
 
 // Performance & Code Splitting (#89, #90)
@@ -208,6 +206,17 @@ class _VolunteeringAppState extends State<VolunteeringApp> {
                     ? const MainShell()
                     : const WelcomeScreen(),
             onGenerateRoute: (settings) {
+              // Deep link from the password-reset email: /reset-password?uid=..&token=..
+              final uri = Uri.parse(settings.name ?? '/');
+              if (uri.path == '/reset-password') {
+                return MaterialPageRoute(
+                  builder: (_) => ResetPasswordScreen(
+                    uid: uri.queryParameters['uid'] ?? '',
+                    token: uri.queryParameters['token'] ?? '',
+                  ),
+                  settings: settings,
+                );
+              }
               switch (settings.name) {
                 case '/welcome':
                   return MaterialPageRoute(

@@ -79,6 +79,11 @@ class ApiClient {
       if (response.statusCode == 200) {
         final newAccessToken = response.data['access'];
         await _storage.write(key: 'access_token', value: newAccessToken);
+        // Server rotates refresh tokens: store the new one (old one is blacklisted)
+        final newRefreshToken = response.data['refresh'];
+        if (newRefreshToken != null) {
+          await _storage.write(key: 'refresh_token', value: newRefreshToken);
+        }
         return true;
       }
 
@@ -104,6 +109,8 @@ class ApiClient {
       options: options,
     );
   }
+
+  Future<String?> getRefreshToken() => _storage.read(key: 'refresh_token');
 
   Future<void> saveTokens(String accessToken, String refreshToken) async {
     await _storage.write(key: 'access_token', value: accessToken);

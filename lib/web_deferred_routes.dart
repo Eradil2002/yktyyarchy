@@ -29,11 +29,15 @@ import 'package:flutter/material.dart';
 import 'package:volunteering/features/profile/screens/volunteer_book_screen.dart'
     deferred as _volunteerBook;
 
+// Loaded on demand via loadLibrary() below (analyzer can't see deferred-only usage)
+// ignore: unused_import
 import 'package:volunteering/features/profile/screens/ngo_profile_screen.dart'
     deferred as _ngoProfile;
 
+// ignore: unused_import
 import 'package:volunteering/features/talents/screens/volunteer_profile_screen.dart'
     deferred as _volunteerProfile;
+
 
 import 'package:volunteering/features/events/screens/create_event_screen.dart'
     deferred as _createEvent;

@@ -123,3 +123,8 @@ def clear_failed_login_attempts(ip_address, username):
 
     cache.delete(ip_key)
     cache.delete(user_key)
+
+
+class PasswordResetConfirmThrottle(AnonRateThrottle):
+    """Limits password-reset confirmation attempts per IP (token brute force)."""
+    scope = 'password_reset_confirm'

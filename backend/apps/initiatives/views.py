@@ -1,3 +1,4 @@
+from apps.users.permissions import IsOwnerOrReadOnly
 from rest_framework import viewsets, permissions, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -8,7 +9,8 @@ from apps.users.search import search_initiatives
 
 class InitiativeViewSet(viewsets.ModelViewSet):
     serializer_class = InitiativeSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    owner_field = 'author'
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['status', 'category', 'author']
     search_fields = ['title', 'description', 'category', 'location']
@@ -32,9 +34,18 @@ class InitiativeViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+    def perform_update(self, serializer):
+        if serializer.instance.status == 'approved' and not self.request.user.is_staff:
+            from rest_framework.exceptions import PermissionDenied
+            raise PermissionDenied('Одобренную инициативу нельзя изменить.')
+        serializer.save()
+
     @action(detail=True, methods=['post'], permission_classes=[permissions.IsAdminUser])
     def approve(self, request, pk=None):
         initiative = self.get_object()
+        if initiative.status == 'approved':
+            # Prevent double-crediting hours
+            return Response({'detail': 'Initiative already approved'}, status=status.HTTP_400_BAD_REQUEST)
 
         if initiative.hours_claimed <= 0 or initiative.hours_claimed > 100:
             return Response(

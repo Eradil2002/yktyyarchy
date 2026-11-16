@@ -67,6 +67,8 @@ class TestEventSerializer:
     def test_spots_booked_in_serializer(self, ngo_user, volunteer_user):
         """Test spots_booked field in serializer."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -83,6 +85,8 @@ class TestEventSerializer:
     def test_is_registered_field_authenticated(self, ngo_user, volunteer_user, api_client):
         """Test is_registered field for authenticated user."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -100,6 +104,7 @@ class TestEventSerializer:
         request = factory.get('/')
         request.user = volunteer_user
         drf_request = Request(request)
+        drf_request.user = volunteer_user
 
         serializer = EventSerializer(event, context={'request': drf_request})
         assert serializer.data['is_registered'] is True
@@ -107,6 +112,8 @@ class TestEventSerializer:
     def test_is_registered_field_not_registered(self, ngo_user, volunteer_user, api_client):
         """Test is_registered field when user is not registered."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -121,6 +128,7 @@ class TestEventSerializer:
         request = factory.get('/')
         request.user = volunteer_user
         drf_request = Request(request)
+        drf_request.user = volunteer_user
 
         serializer = EventSerializer(event, context={'request': drf_request})
         assert serializer.data['is_registered'] is False
@@ -133,6 +141,8 @@ class TestEventRegistrationSerializer:
     def test_serialize_registration(self, ngo_user, volunteer_user):
         """Test serializing an event registration."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),

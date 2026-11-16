@@ -27,6 +27,11 @@ services:
         value: https://*.onrender.com
       - key: CELERY_TASK_ALWAYS_EAGER
         value: "True"
+      - key: FRONTEND_URL
+        value: https://eradil2002.github.io/yktyyarchy
+      # Секретный путь к админке: Render сгенерирует случайное значение (смотрите в Environment)
+      - key: ADMIN_URL
+        generateValue: true
 
 databases:
   - name: yktyyarchy-db

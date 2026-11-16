@@ -36,6 +36,8 @@ class TestEventModel:
     def test_event_str_representation(self, ngo_user):
         """Test event string representation."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -116,6 +118,8 @@ class TestEventModel:
     def test_spots_booked_property(self, ngo_user, volunteer_user):
         """Test spots_booked property counts approved registrations."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -142,6 +146,8 @@ class TestEventModel:
     def test_event_types(self, ngo_user):
         """Test event type choices."""
         online_event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Online Webinar',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -153,6 +159,8 @@ class TestEventModel:
         assert online_event.type == 'online'
 
         offline_event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Offline Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -166,6 +174,8 @@ class TestEventModel:
     def test_event_status_choices(self, ngo_user):
         """Test event status choices."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -192,6 +202,8 @@ class TestEventRegistrationModel:
     def test_create_registration(self, ngo_user, volunteer_user):
         """Test creating an event registration."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -213,6 +225,8 @@ class TestEventRegistrationModel:
     def test_registration_status_choices(self, ngo_user, volunteer_user):
         """Test registration status choices."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),
@@ -253,6 +267,8 @@ class TestEventRegistrationModel:
     def test_registration_str_representation(self, ngo_user, volunteer_user):
         """Test registration string representation."""
         event = Event.objects.create(
+            description='Test description',
+            category='ecology',
             title='Test Event',
             organizer=ngo_user,
             date=timezone.now() + timedelta(days=1),

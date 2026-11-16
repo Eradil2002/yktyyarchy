@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:volunteering/core/api/api_client.dart';
 import 'package:volunteering/core/theme/app_theme.dart';
 import 'package:volunteering/l10n/app_localizations.dart';
 import 'package:volunteering/features/auth/screens/auth_widgets.dart';
@@ -20,10 +21,29 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   late Animation<double> _logoFade;
   late Animation<Offset> _contentSlide;
   late Animation<double> _contentFade;
+  Map<String, dynamic>? _stats;
+
+  // Real counters from the backend (no hardcoded marketing numbers)
+  Future<void> _loadStats() async {
+    try {
+      final r = await ApiClient().dio.get('users/public-stats/');
+      if (mounted && r.data is Map) setState(() => _stats = Map<String, dynamic>.from(r.data));
+    } catch (_) {
+      // Backend unavailable: keep placeholders
+    }
+  }
+
+  String _fmt(String key) {
+    final v = _stats?[key];
+    if (v is! num) return '—';
+    final n = v.toInt();
+    return n >= 1000 ? '${(n / 1000).toStringAsFixed(n >= 10000 ? 0 : 1)}K' : '$n';
+  }
 
   @override
   void initState() {
     super.initState();
+    _loadStats();
     _logoController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 800),
@@ -143,11 +163,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            _StatChip(value: '5,000+', label: l10n.volunteersCount),
+                            _StatChip(value: _fmt('volunteers'), label: l10n.volunteersCount),
                             Container(width: 1, height: 40, color: Colors.white24),
-                            _StatChip(value: '250+', label: l10n.organizationsCount),
+                            _StatChip(value: _fmt('organizations'), label: l10n.organizationsCount),
                             Container(width: 1, height: 40, color: Colors.white24),
-                            _StatChip(value: '1,200+', label: l10n.eventsCount),
+                            _StatChip(value: _fmt('events'), label: l10n.eventsCount),
                           ],
                         ),
                       ),
