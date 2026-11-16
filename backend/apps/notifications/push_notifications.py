@@ -92,18 +92,12 @@ def notify_new_event(event):
     volunteers = CustomUser.objects.filter(role='volunteer')
 
     # Filter by category interest (volunteers who participated in similar events)
-    interested_volunteers = volunteers.filter(
-        registrations__event__category=event.category
-    ).distinct()
-
-    # Also notify volunteers in the same location
+    # Build one Q filter (OR of category interest and same city) to avoid combining distinct/non-distinct querysets
+    from django.db.models import Q
+    criteria = Q(event_registrations__event__category=event.category)
     if event.location:
-        location_volunteers = volunteers.filter(
-            location__icontains=event.location.split(',')[0]  # City name
-        )
-        interested_volunteers = interested_volunteers | location_volunteers
-
-    interested_volunteers = interested_volunteers.distinct()
+        criteria |= Q(location__icontains=event.location.split(',')[0])  # City name
+    interested_volunteers = volunteers.filter(criteria).distinct()
 
     title = "Новое мероприятие!"
     body = f"{event.title} - {event.date.strftime('%d.%m.%Y')}"

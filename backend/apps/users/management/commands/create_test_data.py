@@ -13,6 +13,20 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write('Creating test data...')
 
+        # Simple demo login for quick testing: test / test (demo server only — remove before real launch)
+        demo, created = CustomUser.objects.get_or_create(
+            username='test',
+            defaults=dict(email='test@example.com', first_name='Тест', last_name='Волонтёр',
+                          role='volunteer', location='Бишкек, Кыргызстан', email_verified=True),
+        )
+        if created:
+            demo.set_password('test')
+            demo.save()
+            VolunteerProfile.objects.get_or_create(user=demo, defaults={'bio': 'Демо-аккаунт'})
+        if CustomUser.objects.filter(username='aibek_volunteer').exists():
+            self.stdout.write('Test data already exists, skipping.')
+            return
+
         # Create volunteers
         volunteer1 = CustomUser.objects.create_user(
             username='aibek_volunteer',
@@ -275,6 +289,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('\n=== Test data created successfully! ==='))
         self.stdout.write(self.style.SUCCESS('\nTest accounts:'))
         self.stdout.write('Volunteers:')
+        self.stdout.write('  - test / test')
         self.stdout.write('  - aibek_volunteer / test1234')
         self.stdout.write('  - gulnara_volunteer / test1234')
         self.stdout.write('  - bektur_volunteer / test1234')
