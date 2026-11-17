@@ -559,6 +559,9 @@
   "categoryAnimals": "Жаныбарлар",
   "categoryCulture": "Маданият",
   "categorySport": "Спорт",
+  "categoryChildren": "Балдар",
+  "categoryElderly": "Карылар",
+  "categoryIT": "IT",
   "categoryOther": "Башка",
 
   "kyrgyzstan": "Кыргызстан",
@@ -612,5 +615,9 @@
   },
 
   "mapQuickFiltersHint": "Тез фильтрлер",
-  "loadingMore": "Дагы жүктөлүүдө..."
+  "loadingMore": "Дагы жүктөлүүдө...",
+  "english": "English",
+  "englishNative": "Англисче",
+  "languageEnglish": "English",
+  "languageKyrgyz": "Кыргызча"
 }

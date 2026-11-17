@@ -3,6 +3,7 @@
 cd "$(dirname "$0")"
 export PATH="$HOME/flutter/bin:$PATH"
 flutter pub get > .check_pub.log 2>&1
+flutter gen-l10n >> .check_pub.log 2>&1
 flutter analyze --no-fatal-infos > .check_analyze.log 2>&1; echo "EXIT $?" >> .check_analyze.log
 flutter test > .check_test.log 2>&1; echo "EXIT $?" >> .check_test.log
 flutter build web --release --base-href /yktyyarchy/ > .check_build.log 2>&1; echo "EXIT $?" >> .check_build.log

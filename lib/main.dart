@@ -111,6 +111,7 @@ void main() async {
   await Future.wait([
     initializeDateFormatting('ru', null),
     initializeDateFormatting('ky', null),
+    initializeDateFormatting('en', null),
   ]);
 
   await Hive.initFlutter();

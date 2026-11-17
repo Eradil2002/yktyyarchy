@@ -26,13 +26,58 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email', 'phone', 'first_name', 'last_name',
                   'role', 'avatar', 'location', 'total_hours', 'rating', 'is_verified',
                   'email_verified', 'volunteer_profile', 'ngo_profile', 'links')
-        read_only_fields = ('total_hours', 'rating', 'is_verified', 'email_verified')
+        # role/email/phone/username must not be changed via profile update:
+        # role -> privilege escalation; email/phone -> bypass of verification (phone is used for WhatsApp login)
+        read_only_fields = ('total_hours', 'rating', 'is_verified', 'email_verified',
+                            'role', 'email', 'phone', 'username')
+
+    MAX_BIO_LEN = 1000
+    MAX_SKILLS = 20
+    MAX_SKILL_LEN = 50
 
     def get_links(self, obj):
         request = self.context.get('request')
         if request:
             return add_user_links(obj, request)
         return {}
+
+    def _extract_profile_fields(self):
+        """bio/skills come flat from the app (JSON or multipart), but live in VolunteerProfile."""
+        data = self.initial_data
+        out = {}
+        if 'bio' in data:
+            bio = str(data.get('bio') or '').strip()
+            if len(bio) > self.MAX_BIO_LEN:
+                raise serializers.ValidationError({'bio': f'Не более {self.MAX_BIO_LEN} символов.'})
+            out['bio'] = bio
+        skills = None
+        if hasattr(data, 'getlist'):  # multipart / QueryDict
+            for key in ('skills', 'skills[]'):
+                if key in data:
+                    skills = data.getlist(key)
+        elif 'skills' in data:
+            skills = data.get('skills')
+        if skills is not None:
+            if isinstance(skills, str):
+                skills = [skills]
+            if not isinstance(skills, list):
+                raise serializers.ValidationError({'skills': 'Ожидается список.'})
+            skills = [str(x).strip() for x in skills if str(x).strip()]
+            skills = list(dict.fromkeys(skills))  # dedupe, keep order
+            if len(skills) > self.MAX_SKILLS or any(len(x) > self.MAX_SKILL_LEN for x in skills):
+                raise serializers.ValidationError({'skills': f'До {self.MAX_SKILLS} навыков, каждый до {self.MAX_SKILL_LEN} символов.'})
+            out['skills'] = skills
+        return out
+
+    def update(self, instance, validated_data):
+        profile_fields = self._extract_profile_fields()
+        instance = super().update(instance, validated_data)
+        if profile_fields and instance.role == 'volunteer':
+            profile, _ = VolunteerProfile.objects.get_or_create(user=instance)
+            for k, v in profile_fields.items():
+                setattr(profile, k, v)
+            profile.save()
+        return instance
 
 
 class RegisterSerializer(serializers.ModelSerializer):

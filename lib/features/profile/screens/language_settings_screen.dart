@@ -58,6 +58,15 @@ class LanguageSettingsScreen extends StatelessWidget {
                     localeProvider.setLocale(const Locale('ky'));
                   },
                 ),
+                const SizedBox(height: 12),
+                LangOption(
+                  flag: '🇬🇧',
+                  name: l10n.english,
+                  subtitle: l10n.englishNative,
+                  code: 'en',
+                  isSelected: currentLocale == 'en',
+                  onTap: () => localeProvider.setLocale(const Locale('en')),
+                ),
               ],
             ),
           ),

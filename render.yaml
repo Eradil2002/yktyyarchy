@@ -32,6 +32,9 @@ services:
       # Секретный путь к админке: Render сгенерирует случайное значение (смотрите в Environment)
       - key: ADMIN_URL
         generateValue: true
+      # Демо-вход test/test. Перед реальным запуском поставьте "False" в Render → Environment
+      - key: DEMO_ACCOUNT_ENABLED
+        value: "True"
 
 databases:
   - name: yktyyarchy-db

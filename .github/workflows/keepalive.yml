@@ -1,0 +1,17 @@
+# Пинг бэкенда на Render, чтобы бесплатный сервер не засыпал (первый вход без ожидания ~1 мин)
+name: Keep backend awake
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Ping /health/
+        run: curl -fsS -m 120 --retry 2 https://yktyyarchy-api.onrender.com/health/ -o /dev/null -w "HTTP %{http_code}\n"

@@ -13,16 +13,36 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write('Creating test data...')
 
-        # Simple demo login for quick testing: test / test (demo server only — remove before real launch)
-        demo, created = CustomUser.objects.get_or_create(
-            username='test',
-            defaults=dict(email='test@example.com', first_name='Тест', last_name='Волонтёр',
-                          role='volunteer', location='Бишкек, Кыргызстан', email_verified=True),
-        )
+        # Simple demo login for quick testing: test / test.
+        # Controlled by DEMO_ACCOUNT_ENABLED (set to False in Render before the real launch:
+        # the account is then deactivated and cannot log in).
+        import os
+        if os.getenv('DEMO_ACCOUNT_ENABLED', 'True') != 'True':
+            CustomUser.objects.filter(username='test').update(is_active=False)
+            self.stdout.write('Demo account disabled.')
+            demo, created = None, False
+        else:
+            CustomUser.objects.filter(username='test').update(is_active=True)
+            demo, created = CustomUser.objects.get_or_create(
+                username='test',
+                defaults=dict(email='test@example.com', first_name='Тест', last_name='Волонтёр',
+                              role='volunteer', location='Бишкек, Кыргызстан', email_verified=True),
+            )
         if created:
             demo.set_password('test')
             demo.save()
             VolunteerProfile.objects.get_or_create(user=demo, defaults={'bio': 'Демо-аккаунт'})
+        # Achievement catalogue (idempotent) — without it the app shows "0 of 0"
+        from apps.achievements.models import Achievement
+        for title, desc, rtype, rval, icon in [
+            ('Новичок', 'Отработано более 1 часа волонтерства', 'hours', 1, 'stars'),
+            ('Активный волонтер', 'Отработано более 10 часов волонтерства', 'hours', 10, 'volunteer_activism'),
+            ('Герой сообщества', 'Отработано более 50 часов волонтерства', 'hours', 50, 'workspace_premium'),
+            ('Легенда', 'Отработано более 100 часов волонтерства', 'hours', 100, 'military_tech'),
+        ]:
+            Achievement.objects.get_or_create(requirement_type=rtype, requirement_value=rval,
+                                              defaults={'title': title, 'description': desc, 'icon_url': icon})
+
         if CustomUser.objects.filter(username='aibek_volunteer').exists():
             self.stdout.write('Test data already exists, skipping.')
             return

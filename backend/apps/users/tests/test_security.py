@@ -73,3 +73,28 @@ def test_public_stats_are_real(api_client, volunteer_user, ngo_user):
     r = api_client.get('/api/v1/users/public-stats/')
     assert r.status_code == 200
     assert r.data['volunteers'] >= 1 and r.data['organizations'] >= 1 and 'events' in r.data
+
+
+@pytest.mark.django_db
+class TestProfileUpdate:
+    def test_bio_and_skills_are_saved(self, api_client):
+        u = User.objects.create_user(username='pv', email='pv@t.com', password='p', role='volunteer')
+        api_client.force_authenticate(u)
+        r = api_client.patch('/api/v1/users/me/', {'bio': 'Новое о себе', 'skills': ['Экология', 'Дети']}, format='json')
+        assert r.status_code == 200
+        assert r.data['volunteer_profile']['bio'] == 'Новое о себе'
+        assert r.data['volunteer_profile']['skills'] == ['Экология', 'Дети']
+
+    def test_multipart_skills(self, api_client):
+        u = User.objects.create_user(username='pm', email='pm@t.com', password='p', role='volunteer')
+        api_client.force_authenticate(u)
+        r = api_client.patch('/api/v1/users/me/', {'bio': 'x', 'skills[]': ['A', 'B']}, format='multipart')
+        assert r.status_code == 200, r.data
+        assert r.data['volunteer_profile']['skills'] == ['A', 'B']
+
+    def test_cannot_escalate_role_or_change_email_phone(self, api_client):
+        u = User.objects.create_user(username='esc', email='esc@t.com', password='p', role='volunteer')
+        api_client.force_authenticate(u)
+        api_client.patch('/api/v1/users/me/', {'role': 'ngo', 'email': 'x@evil.com', 'phone': '+996555000000'}, format='json')
+        u.refresh_from_db()
+        assert u.role == 'volunteer' and u.email == 'esc@t.com' and u.phone != '+996555000000'

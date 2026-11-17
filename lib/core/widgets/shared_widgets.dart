@@ -39,11 +39,11 @@ String localizedCategoryLabel(BuildContext context, EventCategory category) {
     case 'animals':
       return l10n.categoryAnimals;
     case 'children':
-      return l10n.categorySocial;
+      return l10n.categoryChildren;
     case 'elderly':
-      return l10n.categorySocial;
+      return l10n.categoryElderly;
     case 'it':
-      return l10n.categoryOther;
+      return l10n.categoryIT;
     case 'education':
       return l10n.categoryEducation;
     case 'health':
